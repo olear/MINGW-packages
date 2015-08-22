@@ -7,3 +7,5 @@
 *.sig
 */src/
 */pkg/
+*.log
+*.log.*
