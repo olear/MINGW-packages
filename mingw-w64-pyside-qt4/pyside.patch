@@ -55,3 +55,16 @@
          --output-directory=${CMAKE_CURRENT_BINARY_DIR}
          ${CMAKE_CURRENT_SOURCE_DIR}/typesystem_pysidetest.xml
  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+--- PySide-1.2.2/sources/pyside/PySide/QtCore/CMakeLists.txt.orig	2015-08-22 15:36:58.484862300 +0200
++++ PySide-1.2.2/sources/pyside/PySide/QtCore/CMakeLists.txt	2015-08-22 23:07:10.592028700 +0200
+@@ -40,9 +40,8 @@
+     set(SPECIFIC_OS_FILES
+         ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtCore/msg_wrapper.cpp
+         ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtCore/point_wrapper.cpp
++	    ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtCore/qsystemsemaphore_wrapper.cpp
+     )
+-else()
+-    set(SPECIFIC_OS_FILES ${CMAKE_CURRENT_BINARY_DIR}/PySide/QtCore/qsystemsemaphore_wrapper.cpp)
+ endif()
+ 
+ set(QtCore_SRC
