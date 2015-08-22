@@ -66,3 +66,18 @@
          s << argId << ';' << endl;
  
          s << indent << '"' << argId << "\" [shape=\"plaintext\" style=\"filled,bold\" margin=\"0\" fontname=\"freemono\" fillcolor=\"white\" penwidth=1 ";
+--- src/PySide-1.2.2/sources/shiboken/libshiboken/sbkenum.cpp.orig	2015-08-22 14:51:32.905720100 +0200
++++ PySide-1.2.2/sources/shiboken/libshiboken/sbkenum.cpp	2015-08-22 14:52:25.847796000 +0200
+@@ -236,8 +236,11 @@
+     else
+         Py_RETURN_FALSE;
+ }
+-
++#ifndef IS_PY3K
++static long enum_hash(PyObject* pyObj)
++#else
+ static Py_hash_t enum_hash(PyObject* pyObj)
++#endif
+ {
+     Py_hash_t val = reinterpret_cast<SbkEnumObject*>(pyObj)->ob_value;
+     if (val == -1)
