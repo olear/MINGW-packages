@@ -40,6 +40,7 @@ build() {
       -G"MSYS Makefiles" \
       -DCMAKE_INSTALL_PREFIX=${MINGW_PREFIX} \
       -DCMAKE_BUILD_TYPE=RELEASE \
+	  -DBUILD_TESTS=FALSE \
       ${_conf} \
       -DPYTHON_EXECUTABLE=${MINGW_PREFIX}/bin/${pyv}.exe
 

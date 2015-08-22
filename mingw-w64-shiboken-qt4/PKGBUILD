@@ -12,7 +12,7 @@ install=${_realname}-${CARCH}.install
 source=(https://pypi.python.org/packages/source/P/PySide/PySide-${pkgver}.tar.gz
         shiboken.patch)
 md5sums=('c45bc400c8a86d6b35f34c29e379e44d'
-         'ec31921e992b6187d887b7051cd84847')
+         'b5950f46d37ee92b57a60b91e3ecb224')
 makedepends=("${MINGW_PACKAGE_PREFIX}-libxml2"
              "${MINGW_PACKAGE_PREFIX}-libxslt"
              "${MINGW_PACKAGE_PREFIX}-python2"

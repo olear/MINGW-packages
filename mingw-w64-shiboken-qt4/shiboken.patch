@@ -66,7 +66,7 @@
          s << argId << ';' << endl;
  
          s << indent << '"' << argId << "\" [shape=\"plaintext\" style=\"filled,bold\" margin=\"0\" fontname=\"freemono\" fillcolor=\"white\" penwidth=1 ";
---- src/PySide-1.2.2/sources/shiboken/libshiboken/sbkenum.cpp.orig	2015-08-22 14:51:32.905720100 +0200
+--- PySide-1.2.2/sources/shiboken/libshiboken/sbkenum.cpp.orig	2015-08-22 14:51:32.905720100 +0200
 +++ PySide-1.2.2/sources/shiboken/libshiboken/sbkenum.cpp	2015-08-22 14:52:25.847796000 +0200
 @@ -236,8 +236,11 @@
      else
@@ -81,3 +81,18 @@
  {
      Py_hash_t val = reinterpret_cast<SbkEnumObject*>(pyObj)->ob_value;
      if (val == -1)
+--- PySide-1.2.2/sources/shiboken/generator/shiboken/cppgenerator.cpp.orig	2015-08-22 15:27:58.272221600 +0200
++++ PySide-1.2.2/sources/shiboken/generator/shiboken/cppgenerator.cpp	2015-08-22 15:29:15.978989600 +0200
+@@ -5058,7 +5058,11 @@
+ 
+ void CppGenerator::writeHashFunction(QTextStream& s, const AbstractMetaClass* metaClass)
+ {
+-    s << "static Py_hash_t " << cpythonBaseName(metaClass) << "_HashFunc(PyObject* self) {" << endl;
++    s << "#ifdef IS_PY3K" << endl;
++	s << "static Py_hash_t " << cpythonBaseName(metaClass) << "_HashFunc(PyObject* self) {" << endl;
++	s << "#else" << endl;
++	s << "static long " << cpythonBaseName(metaClass) << "_HashFunc(PyObject* self) {" << endl;
++	s << "#endif" << endl;
+     writeCppSelfDefinition(s, metaClass);
+     s << INDENT << "return " << metaClass->typeEntry()->hashFunction() << '(';
+     s << (isObjectType(metaClass) ? "" : "*") << CPP_SELF_VAR << ");" << endl;
