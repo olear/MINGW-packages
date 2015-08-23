@@ -90,6 +90,7 @@ package_python2-pyside() {
   make DESTDIR=${pkgdir} install
   
   #install -Dm644 PySideConfig-python2.7.cmake ${pkgdir}${MINGW_PREFIX}/lib/cmake/PySide-${pkgver}/
+  sed -i 's/shiboken/shiboken-py2/g' ${pkgdir}${MINGW_PREFIX}/lib/pkgconfig/pyside-py2.pc
   mv ${pkgdir}${MINGW_PREFIX}/lib/pkgconfig/pyside{,-py2}.pc
   
   rm -rf ${pkgdir}${MINGW_PREFIX}/{include,share}
