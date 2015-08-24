@@ -27,6 +27,15 @@
          set(TINYXML_STATIC_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/tinyxml.lib)
      else()
          set(TINYXML_STATIC_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/libtinyxml.a)
+@@ -217,7 +217,7 @@
+     )
+     set(YAML_CPP_INCLUDE_DIRS ${PROJECT_BINARY_DIR}/ext/dist/include)
+     set(YAML_CPP_LIBRARY_DIRS ${PROJECT_BINARY_DIR}/ext/dist/lib)
+-    if(WIN32)
++    if(WIN32 AND NOT MINGW)
+         set(YAML_CPP_STATIC_DEBUG_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/libyaml-cppmdd.lib)
+         set(YAML_CPP_STATIC_OPTIMIZED_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/libyaml-cppmd.lib)
+     else()
 @@ -231,8 +231,11 @@
  ### Externals ###
  
