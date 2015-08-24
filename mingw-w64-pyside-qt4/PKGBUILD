@@ -1,6 +1,7 @@
 # Maintainer: Alexey Pavlov <alexpux@gmail.com>
 # Contributor: Xin Sun <sun.simpson@gmail.com>
 
+DLAGENTS=("https::/usr/bin/curl -k -o %o %u")
 _realname=pyside
 pkgname=(${MINGW_PACKAGE_PREFIX}-${_realname}-common ${MINGW_PACKAGE_PREFIX}-python{2,3}-${_realname})
 pkgver=1.2.2
