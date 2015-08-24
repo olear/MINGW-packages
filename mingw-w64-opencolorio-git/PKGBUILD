@@ -26,7 +26,7 @@ source=("${_realname}"::"git+https://github.com/imageworks/OpenColorIO.git"
         fix-redefinitions.patch
         detect-mingw-python.patch)
 sha1sums=('SKIP'
-          '2f17db31e1d8ae96198d272c21b3c6e5bf46ec41'
+          '5188d4efb94e9b428cb5384a48469c43'
           '8e4eaca025b110ea18036ccf71e0f5e1e8e17f5b'
           'ff94a1cbfc4935d4f04e5225d078158d5bcaedcc')
 

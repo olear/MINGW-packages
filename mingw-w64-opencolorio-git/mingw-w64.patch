@@ -49,3 +49,12 @@
          # SSE instructions are automatically compiled into 64-bit applications so enabling the option is redundant and
          # actually produces an unknown option warning in Visual Studio.
          if(NOT CMAKE_CL_64)
+@@ -176,7 +176,7 @@
+         INSTALL_DIR ext/dist
+         CMAKE_ARGS ${TINYXML_CMAKE_ARGS}
+     )
+-    if(WIN32)
++    if(WIN32 AND NOT MINGW)
+         set(TINYXML_STATIC_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/tinyxml.lib)
+     else()
+         set(TINYXML_STATIC_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/libtinyxml.a)
