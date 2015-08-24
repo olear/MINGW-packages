@@ -1,5 +1,5 @@
---- mingw-w64-i686-opencolorio-1.0.9/CMakeLists.txt.orig	2013-12-27 22:36:16.348200000 +0400
-+++ mingw-w64-i686-opencolorio-1.0.9/CMakeLists.txt	2013-12-27 22:43:09.892800000 +0400
+--- mingw-w64-i686-opencolorio-1.0.9/CMakeLists.txt.orig	2015-08-24 11:13:02.559132000 +0200
++++ mingw-w64-i686-opencolorio-1.0.9/CMakeLists.txt	2015-08-24 11:32:56.894444100 +0200
 @@ -34,7 +34,7 @@
  option(OCIO_PYGLUE_SONAME "If ON, soname/soversion will be set for Python module library" OFF)
  option(OCIO_PYGLUE_LIB_PREFIX "If ON, prefix the Python module with 'lib'" OFF)
@@ -18,37 +18,6 @@
      if(PYTHON_VERSION AND PYTHON_INCLUDE AND PYTHON_LIB)
          set(EXTDIST_PYTHONPATH ${PYTHON_LIB}/python${PYTHON_VARIANT_PATH}/site-packages)
          set(PYTHONPATH ${EXTDIST_PYTHONPATH};$ENV{PYTHONPATH})
-@@ -245,7 +245,11 @@
- ### Externals ###
- 
- set(EXTERNAL_INCLUDE_DIRS ${EXTERNAL_INCLUDE_DIRS} ${PROJECT_BINARY_DIR}/ext/dist/include)
--set(EXTERNAL_COMPILE_FLAGS "-DTIXML_USE_STL ${YAML_CPP_COMPILE_FLAGS} -fPIC -fvisibility=hidden")
-+if (MINGW)
-+    set(EXTERNAL_COMPILE_FLAGS "-DTIXML_USE_STL ${YAML_CPP_COMPILE_FLAGS} -fvisibility=hidden")
-+else()
-+    set(EXTERNAL_COMPILE_FLAGS "-DTIXML_USE_STL ${YAML_CPP_COMPILE_FLAGS} -fPIC -fvisibility=hidden")
-+endif()
- if(OCIO_INLINES_HIDDEN)
-     set(EXTERNAL_COMPILE_FLAGS "${EXTERNAL_COMPILE_FLAGS} -fvisibility-inlines-hidden")
- endif()
-@@ -250,7 +254,7 @@
- set(EXTERNAL_LIBRARY_DIRS ${PROJECT_BINARY_DIR}/ext/dist/lib)
- set(EXTERNAL_DEBUG_LIBRARIES ${YAML_CPP_STATIC_DEBUG_LIBRARIES})
- set(EXTERNAL_OPTIMIZED_LIBRARIES ${YAML_CPP_STATIC_OPTIMIZED_LIBRARIES})
--set(EXTERNAL_GENERAL_LIBRARIES ${TINYXML_STATIC_LIBRARIES} ${YAML_CPP_STATIC_GENERAL_LIBRARIES})
-+set(EXTERNAL_GENERAL_LIBRARIES ${TINYXML_STATIC_LIBRARIES} ${YAML_CPP_STATIC_GENERAL_LIBRARIES} ${TINYXML_LIBRARIES} ${YAML_CPP_LIBRARIES} )
- 
- ###############################################################################
- ### Documentation ###
-@@ -271,7 +271,7 @@
- messageonce("SSE Optimizations: ${OCIO_USE_SSE}")
- 
- if(OCIO_USE_SSE)
--    if(WIN32)
-+    if(WIN32 AND NOT MINGW)
-         # SSE instructions are automatically compiled into 64-bit applications so enabling the option is redundant and
-         # actually produces an unknown option warning in Visual Studio.
-         if(NOT CMAKE_CL_64)
 @@ -176,7 +176,7 @@
          INSTALL_DIR ext/dist
          CMAKE_ARGS ${TINYXML_CMAKE_ARGS}
@@ -58,3 +27,35 @@
          set(TINYXML_STATIC_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/tinyxml.lib)
      else()
          set(TINYXML_STATIC_LIBRARIES ${PROJECT_BINARY_DIR}/ext/dist/lib/libtinyxml.a)
+@@ -231,8 +231,11 @@
+ ### Externals ###
+ 
+ set(EXTERNAL_INCLUDE_DIRS ${EXTERNAL_INCLUDE_DIRS} ${PROJECT_BINARY_DIR}/ext/dist/include)
+-set(EXTERNAL_COMPILE_FLAGS "-DTIXML_USE_STL")
+-
++if (MINGW)
++    set(EXTERNAL_COMPILE_FLAGS "-DTIXML_USE_STL ${YAML_CPP_COMPILE_FLAGS} -fvisibility=hidden")
++else()
++    set(EXTERNAL_COMPILE_FLAGS "-DTIXML_USE_STL ${YAML_CPP_COMPILE_FLAGS} -fPIC -fvisibility=hidden")
++endif()
+ if(CMAKE_COMPILER_IS_GNUCXX)
+     
+     execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpversion
+@@ -250,7 +253,7 @@
+ set(EXTERNAL_LIBRARY_DIRS ${PROJECT_BINARY_DIR}/ext/dist/lib)
+ set(EXTERNAL_DEBUG_LIBRARIES ${YAML_CPP_STATIC_DEBUG_LIBRARIES})
+ set(EXTERNAL_OPTIMIZED_LIBRARIES ${YAML_CPP_STATIC_OPTIMIZED_LIBRARIES})
+-set(EXTERNAL_GENERAL_LIBRARIES ${TINYXML_STATIC_LIBRARIES} ${YAML_CPP_STATIC_GENERAL_LIBRARIES})
++set(EXTERNAL_GENERAL_LIBRARIES ${TINYXML_STATIC_LIBRARIES} ${YAML_CPP_STATIC_GENERAL_LIBRARIES} ${TINYXML_LIBRARIES} ${YAML_CPP_LIBRARIES} )
+ 
+ ###############################################################################
+ ### Documentation ###
+@@ -271,7 +274,7 @@
+ messageonce("SSE Optimizations: ${OCIO_USE_SSE}")
+ 
+ if(OCIO_USE_SSE)
+-    if(WIN32)
++    if(WIN32 AND NOT MINGW)
+         # SSE instructions are automatically compiled into 64-bit applications so enabling the option is redundant and
+         # actually produces an unknown option warning in Visual Studio.
+         if(NOT CMAKE_CL_64)
