@@ -7,36 +7,24 @@ pkgrel=2
 pkgdesc="Complete and free Internet live audio and video broadcasting solution (mingw-w64)"
 arch=('any')
 url="http://ffmpeg.org/"
-license=('GPL')
-options=('staticlibs' 'strip')
+license=('LGPL')
+options=('strip')
 depends=(
         "${MINGW_PACKAGE_PREFIX}-bzip2"
-        "${MINGW_PACKAGE_PREFIX}-celt"
-        "${MINGW_PACKAGE_PREFIX}-dcadec-git"
-        "${MINGW_PACKAGE_PREFIX}-fontconfig"
-        "${MINGW_PACKAGE_PREFIX}-gnutls"
         "${MINGW_PACKAGE_PREFIX}-gsm"
         "${MINGW_PACKAGE_PREFIX}-lame"
-        "${MINGW_PACKAGE_PREFIX}-libass"
-        "${MINGW_PACKAGE_PREFIX}-libbluray"
-        "${MINGW_PACKAGE_PREFIX}-libcaca"
         "${MINGW_PACKAGE_PREFIX}-libmodplug"
         "${MINGW_PACKAGE_PREFIX}-libtheora"
         "${MINGW_PACKAGE_PREFIX}-libvorbis"
         "${MINGW_PACKAGE_PREFIX}-libvpx"
         "${MINGW_PACKAGE_PREFIX}-libwebp"
         "${MINGW_PACKAGE_PREFIX}-openal"
-        "${MINGW_PACKAGE_PREFIX}-opencore-amr"
         "${MINGW_PACKAGE_PREFIX}-openjpeg"
         "${MINGW_PACKAGE_PREFIX}-opus"
         "${MINGW_PACKAGE_PREFIX}-rtmpdump"
         "${MINGW_PACKAGE_PREFIX}-schroedinger"
-        "${MINGW_PACKAGE_PREFIX}-SDL"
         "${MINGW_PACKAGE_PREFIX}-speex"
         "${MINGW_PACKAGE_PREFIX}-wavpack"
-        "${MINGW_PACKAGE_PREFIX}-x264"
-        "${MINGW_PACKAGE_PREFIX}-x265"
-        "${MINGW_PACKAGE_PREFIX}-xvidcore"
         "${MINGW_PACKAGE_PREFIX}-zlib"
         )
 makedepends=("${MINGW_PACKAGE_PREFIX}-gcc" "${MINGW_PACKAGE_PREFIX}-pkg-config" "${MINGW_PACKAGE_PREFIX}-yasm")
@@ -60,23 +48,11 @@ build() {
     --arch=${CARCH%%-*} \
     --disable-debug \
     --disable-static \
+    --disable-ffprobe \
     --enable-avresample \
-    --enable-dxva2 \
-    --enable-d3d11va \
-    --enable-fontconfig \
-    --enable-gnutls \
-    --enable-gpl \
-    --enable-libass \
-    --enable-libbluray \
-    --enable-libcaca \
-    --enable-libcelt \
-    --enable-libdcadec \
-    --enable-libfreetype \
     --enable-libgsm \
     --enable-libmodplug \
     --enable-libmp3lame \
-    --enable-libopencore_amrnb \
-    --enable-libopencore_amrwb \
     --enable-libopenjpeg \
     --enable-libopus \
     --enable-librtmp \
@@ -84,9 +60,6 @@ build() {
     --enable-libspeex \
     --enable-libtheora \
     --enable-libvorbis \
-    --enable-libx264 \
-    --enable-libx265 \
-    --enable-libxvid \
     --enable-libvpx \
     --enable-openal \
     --enable-libwavpack \
@@ -94,9 +67,7 @@ build() {
     --enable-postproc \
     --enable-runtime-cpudetect \
     --enable-shared \
-    --enable-static \
     --enable-swresample \
-    --enable-version3 \
     --enable-zlib \
     --disable-doc
     #--enable-pthreads
@@ -104,10 +75,10 @@ build() {
   make
 }
 
-check() {
-  cd "${srcdir}/build-${MINGW_CHOST}"
-  make check
-}
+#check() {
+#  cd "${srcdir}/build-${MINGW_CHOST}"
+#  make check
+#}
 
 package() {
   cd "${srcdir}/build-${MINGW_CHOST}"
