@@ -94,10 +94,10 @@ package_python2-shiboken() {
   install -Dm644 ShibokenConfig-python2.7.cmake ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/
   mv ${pkgdir}${MINGW_PREFIX}/lib/pkgconfig/shiboken{,-py2}.pc
   
-  rm ${pkgdir}${MINGW_PREFIX}/bin/*.exe
-  rm -rf ${pkgdir}${MINGW_PREFIX}/{include,share}
-  rm ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/ShibokenConfigVersion.cmake
-  rm ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/ShibokenConfig.cmake
+  #rm ${pkgdir}${MINGW_PREFIX}/bin/*.exe
+  #rm -rf ${pkgdir}${MINGW_PREFIX}/{include,share}
+  #rm ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/ShibokenConfigVersion.cmake
+  #rm ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/ShibokenConfig.cmake
   
   fix_paths
 }
