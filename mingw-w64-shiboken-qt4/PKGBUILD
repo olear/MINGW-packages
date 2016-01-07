@@ -75,15 +75,6 @@ package_shiboken() {
                "${MINGW_PACKAGE_PREFIX}-qt4")
 
   
-  cd ${srcdir}/build-${MINGW_CHOST}-python2/sources/shiboken/data
-  #install -Dm644 ShibokenConfig-python2.7.cmake ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/
-  #install -Dm644 shiboken.pc ${pkgdir}${MINGW_PREFIX}/lib/pkgconfig/Shiboken-py2.pc
-  
-  rm ${pkgdir}${MINGW_PREFIX}/bin/*.dll
-  rm -rf ${pkgdir}${MINGW_PREFIX}/lib/python*
-  rm -rf ${pkgdir}${MINGW_PREFIX}/lib/libshiboken*
-  rm -rf ${pkgdir}${MINGW_PREFIX}/lib/pkgconfig
-  rm ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/ShibokenConfig*python*.cmake
   
   fix_paths
 }

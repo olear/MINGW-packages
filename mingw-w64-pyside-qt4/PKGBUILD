@@ -68,11 +68,6 @@ package_pyside-common() {
   pkgdesc="Provides LGPL Qt bindings for Python and related tools for binding generation (Common files)(mingw-w64)"
 
   
-  rm -rf ${pkgdir}${MINGW_PREFIX}/bin
-  rm -rf ${pkgdir}${MINGW_PREFIX}/lib/python*
-  rm -rf ${pkgdir}${MINGW_PREFIX}/lib/libpyside*
-  rm -rf ${pkgdir}${MINGW_PREFIX}/lib/pkgconfig
-  rm ${pkgdir}${MINGW_PREFIX}/lib/cmake/PySide-${pkgver}/PySideConfig*python*.cmake
   
   fix_paths
 }
