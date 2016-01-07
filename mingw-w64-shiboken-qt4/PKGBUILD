@@ -74,8 +74,6 @@ package_shiboken() {
                "${MINGW_PACKAGE_PREFIX}-libxslt"
                "${MINGW_PACKAGE_PREFIX}-qt4")
 
-  cd ${srcdir}/build-${MINGW_CHOST}-python3/sources/shiboken
-  make DESTDIR=${pkgdir} install
   
   cd ${srcdir}/build-${MINGW_CHOST}-python2/sources/shiboken/data
   #install -Dm644 ShibokenConfig-python2.7.cmake ${pkgdir}${MINGW_PREFIX}/lib/cmake/Shiboken-${pkgver}/
